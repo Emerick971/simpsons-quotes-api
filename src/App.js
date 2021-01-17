@@ -4,7 +4,7 @@ import DisplaySimpson from './components/DisplaySimpson';
 import axios from 'axios';
 
 //initialisation de la constante qui détermine les informations sous forme de tableau
-const sampleSimpson = 
+/*const sampleSimpson = 
 
   {
   quote: "By chilling my loins I increase the chances of impregnating my wife.",
@@ -13,7 +13,7 @@ const sampleSimpson =
   characterDirection: "Left"
   }
 
-;
+;*/
 
 
 //Transformation de 'function App' en 'class App' pour gérer un state
@@ -23,10 +23,14 @@ class App extends React.Component {
 
     //initialisation du state
     this.state = {
-      simpson: sampleSimpson
+      simpson: null
     }
 
     this.getSimpson = this.getSimpson.bind(this);
+  }
+
+  componentDidMount() {
+    this.getSimpson();
   }
 
   getSimpson() {
@@ -41,7 +45,7 @@ class App extends React.Component {
           
         }); 
     });
-   console.log()
+  
   }
 
 render() {
@@ -49,7 +53,14 @@ render() {
 
   return (
     <div className="App">
-        <DisplaySimpson simpson={this.state.simpson} />
+        {/*<DisplaySimpson simpson={this.state.simpson} />*/}
+
+        {
+            this.state.simpson
+             ? <DisplaySimpson simpson={this.state.simpson} />
+             : <p>No data</p>
+
+        }
 
         {/* On ajoute un bouton pour lancer la requête API */}
         <button type="button" onClick={this.getSimpson} >Get New Quote</button>
